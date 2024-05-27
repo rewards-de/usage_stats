@@ -83,7 +83,7 @@ public class UsageStatsPlugin : FlutterPlugin, MethodCallHandler {
             }
             "isInActive" -> {
                 var packageName: String = call.argument<String>("packageName") as String
-                var isAppInActive = UsageStats.isAppActive(packageName = packageName)
+                var isAppInActive = UsageStats.isAppActive(context = mContext!!, packageName = packageName)
                 result.success(isAppInActive)
             }
             "queryNetworkUsageStats" -> {
