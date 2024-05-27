@@ -81,6 +81,11 @@ public class UsageStatsPlugin : FlutterPlugin, MethodCallHandler {
                 var end: Long = call.argument<Long>("end") as Long
                 result.success(UsageStats.queryUsageStats(mContext!!, start, end))
             }
+            "isInActive" -> {
+                var packageName: String = call.argument<String>("packageName") as String
+                var isAppInActive = UsageStats.isAppActive(packageName = packageName)
+                result.success(isAppInActive)
+            }
             "queryNetworkUsageStats" -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     val start: Long = call.argument<Long>("start") as Long

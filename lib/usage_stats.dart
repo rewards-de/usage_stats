@@ -120,4 +120,14 @@ class UsageStats {
         'queryNetworkUsageStatsByPackage', interval);
     return NetworkInfo.fromMap(response);
   }
+
+  static Future<bool> isInActive(String packageName) async {
+    Map response = await _channel.invokeMethod(
+      'isInActive',
+      {
+        'packageName': packageName,
+      },
+    );
+    return response['isInActive'];
+  }
 }

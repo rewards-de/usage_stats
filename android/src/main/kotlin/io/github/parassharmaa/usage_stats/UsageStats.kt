@@ -1,5 +1,6 @@
 package io.github.parassharmaa.usage_stats
 
+import android.annotation.TargetApi
 import android.app.usage.ConfigurationStats
 import android.content.Context
 import android.app.usage.UsageStatsManager
@@ -29,6 +30,13 @@ object UsageStats {
             configList.add(c)
         }
         return configList
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    fun isAppActive(context: Context, packageName: String): Map<String, Boolean> {
+        var usm = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        var isAppInActive: Boolean = usm.isAppInactive(packageName)
+        return mapOf("isInActive" to isAppInActive)
     }
 
     fun queryEvents(context: Context, startDate: Long, endDate: Long): ArrayList<Map<String, String>> {
